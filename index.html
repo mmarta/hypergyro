@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>HyperGyro - Red Balltop</title>
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            body {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #712;
+            }
+
+            canvas {
+                image-rendering: crisp-edges;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="game-canvas"></canvas>
+        <script src="src/system.js"></script>
+        <script src="src/control.js"></script>
+        <script src="src/graphics.js"></script>
+        <script src="src/math-3d.js"></script>
+        <script src="src/background.js"></script>
+        <script src="src/laser.js"></script>
+        <script src="src/player.js"></script>
+        <script src="src/alien.js"></script>
+        <script src="src/collision.js"></script>
+        <script src="src/main.js"></script>
+    </body>
+</html>
