@@ -3,16 +3,20 @@ const Graphics = {
     displayContext: null,
     playArea: document.createElement('canvas'),
     playAreaContext: null,
+    screenW: 0,
+    screenH: 0,
     tate: null,
+    useVsync: false,
     spritePlayer: null,
     spriteLaser: null,
     spriteEnemyLaser: null,
     font: null,
     SMALL_SCALE_MIN_DEPTH: 128,
     MEDIUM_SCALE_MIN_DEPTH: 64,
-    LARGE_SCALE_MIN_DEPTH: 1,
+    LARGE_SCALE_M24IN_DEPTH: 1,
     OBJECT_END_DEPTH: 192,
     BACKGROUND_END_DEPTH: 256,
+    REFRESH_HZ: 60,
     init() {
         this.displayContext = this.display.getContext('2d');
         this.playAreaContext = this.playArea.getContext('2d');
@@ -23,6 +27,29 @@ const Graphics = {
         });
         this.displayResize();
     },
+    testAndSetRefreshMode() {
+        Graphics.printString(Graphics.displayContext, 'Testing Vsync...', 8, 16, 4);
+
+        const now = Date.now();
+        let frameCount = 0;
+
+        return new Promise((resolve, reject) => {
+            const refreshTester = () => {
+                frameCount++;
+                if(Date.now() - now < 1000) requestAnimationFrame(refreshTester);
+                else {
+                    if(frameCount >= 55 && frameCount <= 65) this.useVsync = true;
+                    return resolve();
+                }
+            };
+            requestAnimationFrame(refreshTester);
+        })
+
+    },
+    nextFrame(fn) {
+        if(this.useVsync) requestAnimationFrame(fn);
+        else setTimeout(fn, 1000 / this.REFRESH_HZ);
+    },
     displayResize() {
         let wRatio, hRatio;
         this.tate = (window.innerHeight > window.innerWidth);
@@ -30,34 +57,39 @@ const Graphics = {
         if(this.tate) {
             this.display.width = 224;
             this.display.height = 256;
-            wRatio = (window.innerWidth / this.display.width) >> 0;
-            hRatio = (window.innerHeight / this.display.height) >> 0;
+            wRatio = (window.innerWidth / this.display.width);
+            hRatio = (window.innerHeight / this.display.height);
         } else {
             this.display.width = 320;
             this.display.height = 224;
-            wRatio = (window.innerWidth / this.display.width) >> 0;
-            hRatio = (window.innerHeight / this.display.height) >> 0;
+            wRatio = (window.innerWidth / this.display.width);
+            hRatio = (window.innerHeight / this.display.height);
         }
 
         if(wRatio < 1) wRatio = 1;
         if(hRatio < 1) hRatio = 1;
 
         const chosenRatio = (wRatio > hRatio) ? hRatio : wRatio;
-        this.display.style.width = `${this.display.width * chosenRatio}px`;
-        this.display.style.height = `${this.display.height * chosenRatio}px`;
+        this.screenW = (this.display.width * chosenRatio) >> 0;
+        this.screenH = (this.display.height * chosenRatio) >> 0;
+        this.display.style.width = `${this.screenW}px`;
+        this.display.style.height = `${this.screenH}px`;
     },
     loadImage(src) {
         const img = new Image();
         const promise = new Promise((resolve, reject) => {
             img.addEventListener('load', () => resolve(img));
-            img.addEventListener('error', () => reject(`Could not load image: ${img.src}`));
+                    img.addEventListener('error', () => reject(`Could not load image: ${img.src}`));
             img.src = src;
         });
         return promise;
     },
     async loadGraphics() {
-        this.spritePlayer = await this.loadImage('gfx/hypergyro.png');
         this.font = await this.loadImage('gfx/font.png');
+        this.displayContext.fillStyle = '#000';
+        this.displayContext.fillRect(0, 0, this.display.width, this.display.height);
+        Graphics.printString(Graphics.displayContext, 'Loading Graphics...', 8, 8, 0);
+        this.spritePlayer = await this.loadImage('gfx/hypergyro.png');
         this.spriteLaser = await this.loadImage('gfx/laser.png');
         this.spriteEnemyLaser = await this.loadImage('gfx/enemy-laser.png');
     },

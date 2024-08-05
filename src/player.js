@@ -12,6 +12,7 @@ class Player extends Object3D {
         this.multiplier = 1;
         this.multiplierTimer = 0;
         this.laserButton = false;
+        this.laserAutofireTime = 0;
         this.lasers = [
             new PlayerLaser(),
             new PlayerLaser(),
@@ -29,10 +30,15 @@ class Player extends Object3D {
         this.score = 0;
         this.multiplier = 1;
         this.multiplierTimer = 0;
+        this.laserAutofireTime = 0;
     }
 
     input() {
-        if(Control.state(37) || Control.state(65)) {
+        if(
+            Control.state(37) || Control.state(65)
+            || Control.controllerAxis(0) < -0.7
+            || Control.touchPos === Control.TOUCH_LEFT
+        ) {
             if(this.dir !== Player.DIR_LEFT) {
                 this.sY = 64;
                 this.dir = Player.DIR_LEFT;
@@ -40,7 +46,11 @@ class Player extends Object3D {
             this.pos -= 2;
             if(this.pos < 0) this.pos = 254;
             Math3D.globalPos = this.pos;
-        } else if(Control.state(39) || Control.state(68)) {
+        } else if(
+            Control.state(39) || Control.state(68)
+            || Control.controllerAxis(0) > 0.7
+            || Control.touchPos === Control.TOUCH_RIGHT
+        ) {
             if(this.dir !== Player.DIR_RIGHT) {
                 this.sY = 32;
                 this.dir = Player.DIR_RIGHT;
@@ -53,7 +63,12 @@ class Player extends Object3D {
             this.dir = Player.DIR_STRAIGHT;
         }
 
-        if(Control.state(90) || Control.state(32) || Control.state(17)) {
+        // Key/controller manual fire
+        if(
+            Control.state(90) || Control.state(32) || Control.state(17)
+            || Control.controllerButton(0) || Control.controllerButton(1)
+            || Control.controllerButton(2) || Control.controllerButton(3)
+        ) {
             if(!this.laserButton) {
                 for(let i = 0; i < this.lasers.length; i++) {
                     if(!this.lasers[i].active) {
@@ -64,6 +79,20 @@ class Player extends Object3D {
                 this.laserButton = true;
             }
         } else if(this.laserButton) this.laserButton = false;
+
+        // Touch autofire
+        if(Control.touchPos !== null) {
+            if(!this.laserAutofireTime) {
+                for(let i = 0; i < this.lasers.length; i++) {
+                    if(!this.lasers[i].active) {
+                        this.lasers[i].init(this.pos, this.depth);
+                        break;
+                    }
+                }
+            }
+            this.laserAutofireTime++;
+            if(this.laserAutofireTime >= 8) this.laserAutofireTime = 0;
+        } else if(this.laserAutofireTime) this.laserAutofireTime = 0;
     }
 
     addScore(score) {
