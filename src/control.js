@@ -62,12 +62,12 @@ const Control = {
         return this.codes[code];
     },
     controllerAxis(axis) {
-        if(navigator.getGamepads && navigator.getGamepads().length > 0)
+        if(navigator.getGamepads && navigator.getGamepads()[0])
             return navigator.getGamepads()[0].axes[axis];
         return 0;
     },
     controllerButton(button) {
-        if(navigator.getGamepads && navigator.getGamepads().length > 0)
+        if(navigator.getGamepads && navigator.getGamepads()[0])
             return navigator.getGamepads()[0].buttons[button].pressed;
         return false;
     }
