@@ -1,5 +1,5 @@
 const System = {
-    hi: 3000
+    hi: 20000
 };
 
 class Object3D {
@@ -14,5 +14,4 @@ class Object3D {
         this.sX = 0;
         this.sY = 0;
     }
-
 }

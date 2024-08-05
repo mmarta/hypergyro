@@ -103,12 +103,12 @@
             Graphics.printString(Graphics.playAreaContext, 'Key Left, Key A,', 8, 64, 0);
             Graphics.printString(Graphics.playAreaContext, 'Controller Left,', 8, 72, 0);
             Graphics.printString(Graphics.playAreaContext, 'Touch Left', 8, 80, 0);
-            Graphics.printString(Graphics.playAreaContext, 'Left', 184, 80, 4);
+            Graphics.printString(Graphics.playAreaContext, 'Move Left', 144, 80, 4);
 
             Graphics.printString(Graphics.playAreaContext, 'Key Right, Key D,', 8, 96, 0);
             Graphics.printString(Graphics.playAreaContext, 'Controller Right,', 8, 104, 0);
             Graphics.printString(Graphics.playAreaContext, 'Touch Right', 8, 112, 0);
-            Graphics.printString(Graphics.playAreaContext, 'Right', 176, 112, 4);
+            Graphics.printString(Graphics.playAreaContext, 'Move Right', 136, 112, 4);
 
             Graphics.printString(Graphics.playAreaContext, 'Key Ctrl, Key Z,', 8, 128, 0);
             Graphics.printString(Graphics.playAreaContext, 'Key G, Key Spacebar,', 8, 136, 0);

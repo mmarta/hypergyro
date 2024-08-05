@@ -10,6 +10,7 @@ const Graphics = {
     spritePlayer: null,
     spriteLaser: null,
     spriteEnemyLaser: null,
+    spriteAlien: null,
     font: null,
     SMALL_SCALE_MIN_DEPTH: 128,
     MEDIUM_SCALE_MIN_DEPTH: 64,
@@ -91,6 +92,7 @@ const Graphics = {
         Graphics.printString(Graphics.displayContext, 'Loading Graphics...', 8, 8, 0);
         this.spritePlayer = await this.loadImage('gfx/hypergyro.png');
         this.spriteLaser = await this.loadImage('gfx/laser.png');
+        this.spriteAlien = await this.loadImage('gfx/alien.png');
         this.spriteEnemyLaser = await this.loadImage('gfx/enemy-laser.png');
     },
     printString(context, str, x, y, style) {
