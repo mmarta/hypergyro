@@ -64,7 +64,7 @@
             Background.update();
 
             if(
-                Control.state(90) || Control.state(32) || Control.state(17)
+                Control.state(90) || Control.state(32) || Control.state(17) || Control.state(71)
                 || Control.controllerButton(0) || Control.controllerButton(1)
                 || Control.controllerButton(2) || Control.controllerButton(3)
                 || Control.touchPos !== null
@@ -105,13 +105,13 @@
             Graphics.printString(Graphics.playAreaContext, 'Touch Left', 8, 80, 0);
             Graphics.printString(Graphics.playAreaContext, 'Left', 184, 80, 4);
 
-            Graphics.printString(Graphics.playAreaContext, 'Key Left, Key A,', 8, 96, 0);
+            Graphics.printString(Graphics.playAreaContext, 'Key Right, Key D,', 8, 96, 0);
             Graphics.printString(Graphics.playAreaContext, 'Controller Right,', 8, 104, 0);
             Graphics.printString(Graphics.playAreaContext, 'Touch Right', 8, 112, 0);
             Graphics.printString(Graphics.playAreaContext, 'Right', 176, 112, 4);
 
             Graphics.printString(Graphics.playAreaContext, 'Key Ctrl, Key Z,', 8, 128, 0);
-            Graphics.printString(Graphics.playAreaContext, 'Key Spacebar,', 8, 136, 0);
+            Graphics.printString(Graphics.playAreaContext, 'Key G, Key Spacebar,', 8, 136, 0);
             Graphics.printString(Graphics.playAreaContext, 'Controller Buttons', 8, 144, 0);
             Graphics.printString(Graphics.playAreaContext, '1-4, Touch', 8, 152, 0);
             Graphics.printString(Graphics.playAreaContext, 'Fire', 184, 152, 4);
