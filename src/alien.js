@@ -25,7 +25,7 @@ class Alien extends Object3D {
         if(this.depth >= Graphics.SMALL_SCALE_MIN_DEPTH) this.sX = 64;
         else if(this.depth >= Graphics.MEDIUM_SCALE_MIN_DEPTH) this.sX = 32;
         else this.sX = 0;
-        this.sX += this.setColorOffset();
+        this.sX += this.getColorOffset();
 
         this.zapTime = 0;
         this.animTime = 0;
@@ -70,14 +70,18 @@ class Alien extends Object3D {
 
         this.x = Math3D.getX(this.pos, this.depth, this.w, this.h);
         this.y = Math3D.getY(this.pos, this.depth, this.w, this.h);
-        switch(this.sX) {
+        switch(this.sX % 96) {
             case 64:
-                if(this.depth < Graphics.SMALL_SCALE_MIN_DEPTH) this.sX = 32;
-                this.sX += this.setColorOffset();
+                if(this.depth < Graphics.SMALL_SCALE_MIN_DEPTH) {
+                    this.sX = 32;
+                    this.sX += this.getColorOffset();
+                }
                 break;
             case 32:
-                if(this.depth < Graphics.MEDIUM_SCALE_MIN_DEPTH) this.sX = 0;
-                this.sX += this.setColorOffset();
+                if(this.depth < Graphics.MEDIUM_SCALE_MIN_DEPTH) {
+                    this.sX = 0;
+                    this.sX += this.getColorOffset();
+                }
                 break;
         }
 
@@ -85,7 +89,7 @@ class Alien extends Object3D {
         if(this.animTime >= 8) this.animTime = 0;
     }
 
-    setColorOffset() {
+    getColorOffset() {
         return this.color * 96;
     }
 
