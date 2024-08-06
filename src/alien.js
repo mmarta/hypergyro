@@ -39,7 +39,23 @@ class Alien extends Object3D {
 
         if(this.zapTime) {
             switch(this.zapTime) {
-                case 17:
+                case 1:
+                    this.sY = 0;
+                    if(this.depth >= Graphics.SMALL_SCALE_MIN_DEPTH) this.sX = 0;
+                    else if(this.depth >= Graphics.MEDIUM_SCALE_MIN_DEPTH) this.sX = 32;
+                    else this.sX = 64;
+                    break;
+                case 4:
+                    if(this.depth >= Graphics.SMALL_SCALE_MIN_DEPTH) this.sX = 32;
+                    else if(this.depth >= Graphics.MEDIUM_SCALE_MIN_DEPTH) this.sX = 64;
+                    else this.sX = 96;
+                    break;
+                case 7:
+                    if(this.depth >= Graphics.SMALL_SCALE_MIN_DEPTH) this.sX = 64;
+                    else if(this.depth >= Graphics.MEDIUM_SCALE_MIN_DEPTH) this.sX = 96;
+                    else this.sX = 128;
+                    break;
+                case 10:
                     this.active = false;
                     return;
             }
@@ -65,6 +81,7 @@ class Alien extends Object3D {
         this.depth -= this.speed;
         if(this.depth < 16) {
             this.active = false;
+            Alien.missed++;
             return;
         }
 
@@ -116,8 +133,11 @@ class Alien extends Object3D {
         if(!this.active) return;
 
         if(this.zapTime) {
-            Graphics.playAreaContext.fillStyle = '#ff8800';
-            Graphics.playAreaContext.fillRect(this.x, this.y, this.w, this.h);
+            Graphics.playAreaContext.drawImage(
+                Graphics.spriteAlienZap,
+                this.sX, this.sY, this.w, this.h,
+                this.x, this.y, this.w, this.h
+            )
         } else {
             const relPos = Math3D.getRelativePos(this.pos);
             this.sY = this.getFromRelPos(relPos);
@@ -140,6 +160,8 @@ Alien.COLOR_PURPLE = 0;
 Alien.COLOR_GREEN = 1;
 Alien.COLOR_ORANGE = 2;
 Alien.COLOR_YELLOW = 3;
+
+Alien.missed = 0;
 
 Alien.pool = [
     new Alien(),

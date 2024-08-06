@@ -13,6 +13,7 @@ class Player extends Object3D {
         this.multiplierTimer = 0;
         this.laserButton = false;
         this.laserAutofireTime = 0;
+        this.zapped = false;
         this.lasers = [
             new PlayerLaser(),
             new PlayerLaser(),
@@ -31,6 +32,7 @@ class Player extends Object3D {
         this.multiplier = 1;
         this.multiplierTimer = 0;
         this.laserAutofireTime = 0;
+        this.zapped = false;
     }
 
     input() {
@@ -147,7 +149,7 @@ class Player extends Object3D {
     }
 
     isCollidable() {
-        return this.active;
+        return this.active && !this.zapped;
     }
 
     renderStatsTate() {

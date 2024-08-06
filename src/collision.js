@@ -7,20 +7,20 @@ const Collision = {
             j = player.lasers.length;
             while(j--) {
                 if(player.lasers[j].active && Alien.pool[i].isCollidable()) {
-                    if(this.check(player.lasers[j].pos, player.lasers[j].depth, Alien.pool[i].pos, Alien.pool[i].depth, 8, 8)) {
+                    if(this.check(player.lasers[j].pos, player.lasers[j].depth, Alien.pool[i].pos, Alien.pool[i].depth, 10, 10)) {
                         player.addScore(Alien.pool[i].score);
                         if(player.score > System.hi) System.hi = player.score;
                         Alien.pool[i].zapTime = 1;
                         player.lasers[j].active = false;
+                        Alien.missed = 0;
                         break;
                     }
                 }
             }
 
             if(player.isCollidable() && Alien.pool[i].isCollidable()) {
-                if(this.check(player.pos, player.depth, Alien.pool[i].pos, Alien.pool[i].depth, 4, 4)) {
-                    Alien.pool[i].zapTime = 1;
-                    player.active = false;
+                if(this.check(player.pos, player.depth, Alien.pool[i].pos, Alien.pool[i].depth, 4, 3)) {
+                    player.zapped = true;
                     break;
                 }
             }
@@ -29,9 +29,8 @@ const Collision = {
         i = AlienLaser.pool.length;
         while(i--) {
             if(player.isCollidable() && AlienLaser.pool[i].active) {
-                if(this.check(player.pos, player.depth, AlienLaser.pool[i].pos, AlienLaser.pool[i].depth, 4, 4)) {
-                    AlienLaser.pool[i].active = false;
-                    player.active = false;
+                if(this.check(player.pos, player.depth, AlienLaser.pool[i].pos, AlienLaser.pool[i].depth, 4, 3)) {
+                    player.zapped = true;
                     break;
                 }
             }

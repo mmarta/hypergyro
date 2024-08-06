@@ -43,13 +43,12 @@ const Control = {
 
          setTimeout(this.pollGamepads, 0);
     },
-    setTouchPos(mouseX, mouseY) {
-        const sectorWidth = Graphics.tate
-            ? Graphics.screenW / 3
-            : Graphics.screenW * (Graphics.playArea.width / Graphics.display.width) / 3;
-        if(mouseX < sectorWidth) this.touchPos = this.TOUCH_LEFT;
-        else if(mouseX < sectorWidth * 2) this.touchPos = this.TOUCH_CENTER;
-        else this.touchPos = this.TOUCH_RIGHT;
+    setTouchPos(touchX, touchY) {
+        const ratio = Graphics.screenW / Graphics.display.width;
+        const relTouchX = touchX / ratio;
+        if(relTouchX < 92) this.touchPos = this.TOUCH_LEFT;
+        else if(relTouchX >= 132 && relTouchX < 224) this.touchPos = this.TOUCH_RIGHT;
+        else this.touchPos = this.TOUCH_CENTER;
     },
     press(code) {
         this.codes[code] = true;

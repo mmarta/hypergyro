@@ -1,5 +1,5 @@
 (function() {
-    const SPEED_TIMEOUT_RESTART = 600;
+    const SPEED_TIMEOUT_RESTART = 900;
     let nextEnemyGen = 0, gameOverTimer = 0, gameStarted = false, speed = 1, speedUpdateTimeout;
 
     function resetEnemyGenTimer() {
@@ -19,7 +19,7 @@
         if(gameStarted) {
             Collision.runAll();
 
-            if(!player.active) {
+            if(player.zapped || Alien.missed >= 10) {
                 // Game Over
                 if(gameOverTimer) {
                     gameOverTimer--;
@@ -32,6 +32,8 @@
 
                         i = player.lasers.length;
                         while(i--) player.lasers[i].active = false;
+
+                        player.active = false;
 
                         Background.refresh();
                         gameStarted = false;
@@ -70,6 +72,7 @@
                 || Control.touchPos !== null
             ) {
                 player.start();
+                Alien.missed = 0;
                 nextEnemyGen = resetEnemyGenTimer();
                 speed = 2;
                 speedUpdateTimeout = SPEED_TIMEOUT_RESTART;
@@ -87,6 +90,9 @@
         Background.render();
 
         if(gameStarted) {
+            if(Alien.missed >= 6 && Alien.missed < 10 && !gameOverTimer)
+                Graphics.printString(Graphics.playAreaContext, 'Zap Something!', 56, 48, 2);
+
             i = Alien.pool.length;
             while(i--) Alien.pool[i].render();
 
@@ -96,7 +102,13 @@
             player.render();
 
             // Game over?
-            if(gameOverTimer) Graphics.printString(Graphics.playAreaContext, 'Game Over', 76, 112, 4);
+            if(gameOverTimer) {
+                if(Alien.missed >= 10)
+                    Graphics.printString(Graphics.playAreaContext, 'Missed 10!', 72, 48, 2);
+                else
+                    Graphics.printString(Graphics.playAreaContext, 'Zapped!!', 80, 48, 2);
+                Graphics.printString(Graphics.playAreaContext, 'Game Over', 76, 112, 4);
+            }
         } else {
             Graphics.printString(Graphics.playAreaContext, 'HyperGyro', 76, 32, 6);
             Graphics.printString(Graphics.playAreaContext, 'Controls', 80, 48, 1);

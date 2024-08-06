@@ -9,12 +9,13 @@ const Graphics = {
     useVsync: false,
     spritePlayer: null,
     spriteLaser: null,
-    spriteEnemyLaser: null,
+    spriteAlienLaser: null,
     spriteAlien: null,
+    spriteAlienZap: null,
     font: null,
     SMALL_SCALE_MIN_DEPTH: 128,
     MEDIUM_SCALE_MIN_DEPTH: 64,
-    LARGE_SCALE_M24IN_DEPTH: 1,
+    LARGE_SCALE_MIN_DEPTH: 1,
     OBJECT_END_DEPTH: 192,
     BACKGROUND_END_DEPTH: 256,
     REFRESH_HZ: 60,
@@ -93,7 +94,8 @@ const Graphics = {
         this.spritePlayer = await this.loadImage('gfx/hypergyro.png');
         this.spriteLaser = await this.loadImage('gfx/laser.png');
         this.spriteAlien = await this.loadImage('gfx/alien.png');
-        this.spriteEnemyLaser = await this.loadImage('gfx/enemy-laser.png');
+        this.spriteAlienLaser = await this.loadImage('gfx/alien-laser.png');
+        this.spriteAlienZap = await this.loadImage('gfx/alien-zap.png');
     },
     printString(context, str, x, y, style) {
         for(let i = 0; i < str.length; i++)

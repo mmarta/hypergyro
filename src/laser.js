@@ -104,7 +104,7 @@ class AlienLaser extends Laser {
         if(!this.active) return;
 
         Graphics.playAreaContext.drawImage(
-            Graphics.spriteEnemyLaser, this.sX, this.sY, this.w, this.h,
+            Graphics.spriteAlienLaser, this.sX, this.sY, this.w, this.h,
             this.x, this.y, this.w, this.h
         );
     }
