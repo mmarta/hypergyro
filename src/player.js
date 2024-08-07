@@ -26,6 +26,8 @@ class Player extends Object3D {
         this.animTime = 0;
         this.dir = Player.DIR_STRAIGHT;
         this.sY = 0;
+        this.pos = 0;
+        Math3D.globalPos = this.pos;
         this.x = Math3D.getX(this.pos, this.depth, this.w, this.h);
         this.y = Math3D.getY(this.pos, this.depth, this.w, this.h);
         this.score = 0;
