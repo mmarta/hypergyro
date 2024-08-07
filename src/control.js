@@ -2,6 +2,7 @@ const Control = {
     codes: {},
     touchPos: null,
     controller: null,
+    touchEndedToStart: false,
     TOUCH_LEFT: -1,
     TOUCH_CENTER: 0,
     TOUCH_RIGHT: 1,
@@ -18,6 +19,7 @@ const Control = {
 
         Graphics.display.addEventListener('touchstart', (e) => {
             e.preventDefault();
+
             const rect = Graphics.display.getBoundingClientRect();
             this.setTouchPos(
                 e.touches[0].clientX - rect.left,
@@ -27,6 +29,7 @@ const Control = {
 
         Graphics.display.addEventListener('touchend', (e) => {
             e.preventDefault();
+            this.touchEndedToStart = true;
             this.touchPos = null;
         });
 

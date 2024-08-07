@@ -20,6 +20,15 @@ class PlayerLaser extends Laser {
         super();
     }
 
+    init(pos, depth) {
+        super.init(pos, depth);
+        AudioSystem.playerFire.stop();
+        AudioSystem.playerFire.play();
+        // AudioSystem.playerFire.pause();
+        // AudioSystem.playerFire.currentTime = 0;
+        // AudioSystem.playerFire.play();
+    }
+
     update() {
         if(!this.active) return;
 

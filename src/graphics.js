@@ -30,7 +30,7 @@ const Graphics = {
         this.displayResize();
     },
     testAndSetRefreshMode() {
-        Graphics.printString(Graphics.displayContext, 'Testing Vsync...', 8, 16, 4);
+        Graphics.printString(Graphics.displayContext, 'Testing Vsync...', 8, 24, 4);
 
         const now = Date.now();
         let frameCount = 0;

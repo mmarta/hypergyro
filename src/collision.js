@@ -21,6 +21,7 @@ const Collision = {
             if(player.isCollidable() && Alien.pool[i].isCollidable()) {
                 if(this.check(player.pos, player.depth, Alien.pool[i].pos, Alien.pool[i].depth, 4, 3)) {
                     player.zapped = true;
+                    AudioSystem.playerZap.play();
                     break;
                 }
             }
@@ -31,6 +32,7 @@ const Collision = {
             if(player.isCollidable() && AlienLaser.pool[i].active) {
                 if(this.check(player.pos, player.depth, AlienLaser.pool[i].pos, AlienLaser.pool[i].depth, 4, 3)) {
                     player.zapped = true;
+                    AudioSystem.playerZap.play();
                     break;
                 }
             }
