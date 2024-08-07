@@ -7,7 +7,7 @@ const Collision = {
             j = player.lasers.length;
             while(j--) {
                 if(player.lasers[j].active && Alien.pool[i].isCollidable()) {
-                    if(this.check(player.lasers[j].pos, player.lasers[j].depth, Alien.pool[i].pos, Alien.pool[i].depth, 8, 8)) {
+                    if(this.check(player.lasers[j].pos, player.lasers[j].depth, Alien.pool[i].pos, Alien.pool[i].depth, 12, 4)) {
                         player.addScore(Alien.pool[i].score);
                         if(player.score > System.hi) System.hi = player.score;
                         Alien.pool[i].zapTime = 1;
@@ -19,7 +19,7 @@ const Collision = {
             }
 
             if(player.isCollidable() && Alien.pool[i].isCollidable()) {
-                if(this.check(player.pos, player.depth, Alien.pool[i].pos, Alien.pool[i].depth, 6, 3)) {
+                if(this.check(player.pos, player.depth, Alien.pool[i].pos, Alien.pool[i].depth, 6, 2)) {
                     player.zapped = true;
                     AudioSystem.playerZap.play();
                     break;
@@ -30,7 +30,7 @@ const Collision = {
         i = AlienLaser.pool.length;
         while(i--) {
             if(player.isCollidable() && AlienLaser.pool[i].active) {
-                if(this.check(player.pos, player.depth, AlienLaser.pool[i].pos, AlienLaser.pool[i].depth, 6, 3)) {
+                if(this.check(player.pos, player.depth, AlienLaser.pool[i].pos, AlienLaser.pool[i].depth, 6, 2)) {
                     player.zapped = true;
                     AudioSystem.playerZap.play();
                     break;

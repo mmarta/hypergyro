@@ -40,6 +40,7 @@ class Alien extends Object3D {
         if(this.zapTime) {
             switch(this.zapTime) {
                 case 1:
+                    AudioSystem.alienZap.stop();
                     AudioSystem.alienZap.play();
                     this.sY = 0;
                     if(this.depth >= Graphics.SMALL_SCALE_MIN_DEPTH) this.sX = 0;
@@ -165,6 +166,8 @@ Alien.COLOR_YELLOW = 3;
 Alien.missed = 0;
 
 Alien.pool = [
+    new Alien(),
+    new Alien(),
     new Alien(),
     new Alien(),
     new Alien(),

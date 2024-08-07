@@ -18,7 +18,7 @@ const Graphics = {
     LARGE_SCALE_MIN_DEPTH: 1,
     OBJECT_END_DEPTH: 192,
     BACKGROUND_END_DEPTH: 256,
-    REFRESH_HZ: 60,
+    TARGET_REFRESH_HZ: 60,
     init() {
         this.displayContext = this.display.getContext('2d');
         this.playAreaContext = this.playArea.getContext('2d');
@@ -40,17 +40,16 @@ const Graphics = {
                 frameCount++;
                 if(Date.now() - now < 1000) requestAnimationFrame(refreshTester);
                 else {
-                    if(frameCount >= 55 && frameCount <= 65) this.useVsync = true;
+                    if(frameCount >= this.TARGET_REFRESH_HZ - 5 && frameCount <= this.TARGET_REFRESH_HZ + 5) this.useVsync = true;
                     return resolve();
                 }
             };
             requestAnimationFrame(refreshTester);
-        })
-
+        });
     },
     nextFrame(fn) {
         if(this.useVsync) requestAnimationFrame(fn);
-        else setTimeout(fn, 1000 / this.REFRESH_HZ);
+        else setTimeout(fn, 1000 / this.TARGET_REFRESH_HZ);
     },
     displayResize() {
         let wRatio, hRatio;
@@ -81,7 +80,10 @@ const Graphics = {
         const img = new Image();
         const promise = new Promise((resolve, reject) => {
             img.addEventListener('load', () => resolve(img));
-                    img.addEventListener('error', () => reject(`Could not load image: ${img.src}`));
+            img.addEventListener('error', () => reject({
+                error: 'Could not load image',
+                file: img.src.substring(img.src.lastIndexOf('/') + 1)
+            }));
             img.src = src;
         });
         return promise;

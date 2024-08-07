@@ -69,7 +69,7 @@ class Player extends Object3D {
 
         // Key/controller manual fire
         if(
-            Control.state(90) || Control.state(32) || Control.state(17) || Control.state(71)
+            Control.state(90) || Control.state(32) || Control.state(71)
             || Control.controllerButton(0) || Control.controllerButton(1)
             || Control.controllerButton(2) || Control.controllerButton(3)
         ) {

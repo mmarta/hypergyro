@@ -14,6 +14,8 @@ const Control = {
 
         window.addEventListener('keyup', (e) => {
             e.preventDefault();
+            if(e.which === 13)
+                this.touchEndedToStart = true;
             this.release(e.which);
         });
 
@@ -22,15 +24,17 @@ const Control = {
 
             const rect = Graphics.display.getBoundingClientRect();
             this.setTouchPos(
-                e.touches[0].clientX - rect.left,
-                e.touches[0].clientY - rect.top
+                e.targetTouches[0].clientX - rect.left,
+                e.targetTouches[0].clientY - rect.top
             );
         });
 
         Graphics.display.addEventListener('touchend', (e) => {
             e.preventDefault();
-            this.touchEndedToStart = true;
-            this.touchPos = null;
+            if(!e.targetTouches[0]) {
+                this.touchEndedToStart = true;
+                this.touchPos = null;
+            }
         });
 
         Graphics.display.addEventListener('touchmove', (e) => {
