@@ -3,18 +3,11 @@
     let nextEnemyGen = 0, gameOverTimer = 0, getReadyTimer = 0, gameStarted = false, speed = 2, speedUpdateTimeout;
 
     function resetEnemyGenTimer() {
-        return nextEnemyGen = ((Math.random() * (40 / speed)) >> 0) + ((20 / speed) >> 0);
+        return ((Math.random() * (40 / speed)) >> 0) + ((20 / speed) >> 0);
     }
 
     function update() {
         let i;
-
-        // Handle fullStretch updates
-        if(Graphics.fullStretch) {
-            if(Control.state(49)) Graphics.toggleFullStretch(false);
-        } else {
-            if(Control.state(50)) Graphics.toggleFullStretch(true);
-        }
 
         if(gameStarted) {
             Collision.runAll();

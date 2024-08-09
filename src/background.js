@@ -1,5 +1,5 @@
 class BackgroundStar {
-    constructor(pos, depth, color) {
+    constructor() {
         this.pos = (Math.random() * 256) >> 0;
         this.depth = (Math.random() * 256) >> 0;
         this.x = Math3D.getX(this.pos, this.depth, 1, 1);
