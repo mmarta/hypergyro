@@ -19,7 +19,7 @@ const Collision = {
             }
 
             if(player.isCollidable() && Alien.pool[i].isCollidable()) {
-                if(this.check(player.pos, player.depth, Alien.pool[i].pos, Alien.pool[i].depth, 6, 3)) {
+                if(this.check(player.pos, player.depth, Alien.pool[i].pos, Alien.pool[i].depth, 6, 2)) {
                     player.zapped = true;
                     AudioSystem.playerZap.play();
                     break;
