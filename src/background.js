@@ -1,10 +1,7 @@
 class BackgroundStar {
     constructor() {
-        this.pos = (Math.random() * 256) >> 0;
+        this.refresh();
         this.depth = (Math.random() * 256) >> 0;
-        this.x = Math3D.getX(this.pos, this.depth, 1, 1);
-        this.y = Math3D.getY(this.pos, this.depth, 1, 1);
-        this.color = Graphics.createRandomColor();
     }
 
     refresh() {
@@ -30,11 +27,8 @@ const Background = {
     },
     refresh() {
         for(let i = 0; i < this.stars.length; i++) {
-            this.stars[i].pos = (Math.random() * 256) >> 0;
+            this.stars[i].refresh();
             this.stars[i].depth = (Math.random() * 256) >> 0;
-            this.stars[i].x = Math3D.getX(this.pos, this.depth, 1, 1);
-            this.stars[i].y = Math3D.getY(this.pos, this.depth, 1, 1);
-            this.stars[i].color = Graphics.createRandomColor();
         }
     },
     update() {

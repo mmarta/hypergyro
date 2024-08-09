@@ -14,7 +14,7 @@ const Control = {
 
         window.addEventListener('keyup', (e) => {
             e.preventDefault();
-            if(e.which === 13)
+            if(e.which === 13 || e.which === 49)
                 this.touchEndedToStart = true;
             this.release(e.which);
         });
