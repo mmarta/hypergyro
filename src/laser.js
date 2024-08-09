@@ -33,7 +33,7 @@ class PlayerLaser extends Laser {
         if(!this.active) return;
 
         this.depth += 4;
-        if(this.depth > 192) {
+        if(this.depth >= Graphics.OBJECT_END_DEPTH) {
             this.active = false;
             return;
         }

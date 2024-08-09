@@ -34,7 +34,7 @@ const Background = {
     update() {
         for(let i = 0; i < this.stars.length; i++) {
             this.stars[i].depth -= (i < 20 ? 8 : 4);
-            if(this.stars[i].depth <= 16) this.stars[i].refresh();
+            if(this.stars[i].depth <= Graphics.OBJECT_START_DEPTH) this.stars[i].refresh();
             else {
                 this.stars[i].x = Math3D.getX(this.stars[i].pos, this.stars[i].depth, 1, 1);
                 this.stars[i].y = Math3D.getY(this.stars[i].pos, this.stars[i].depth, 1, 1);

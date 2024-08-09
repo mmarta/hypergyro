@@ -81,7 +81,7 @@ class Alien extends Object3D {
         }
 
         this.depth -= this.speed;
-        if(this.depth < 16) {
+        if(this.depth < Graphics.OBJECT_START_DEPTH) {
             this.active = false;
             Alien.missed++;
             return;
