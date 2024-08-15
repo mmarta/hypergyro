@@ -30,7 +30,7 @@ const Collision = {
         i = AlienLaser.pool.length;
         while(i--) {
             if(player.isCollidable() && AlienLaser.pool[i].active) {
-                if(this.check(player.pos, player.depth, AlienLaser.pool[i].pos, AlienLaser.pool[i].depth, 6, 3)) {
+                if(this.check(player.pos, player.depth, AlienLaser.pool[i].pos, AlienLaser.pool[i].depth, 4, 3)) {
                     player.zapped = true;
                     AudioSystem.playerZap.play();
                     break;
