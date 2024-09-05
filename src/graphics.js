@@ -36,8 +36,8 @@ const Graphics = {
         this.displayResize();
     },
     testAndSetRefreshMode() {
-        Graphics.printString(Graphics.preRenderContext, 'Testing Vsync...', 8, 24, 4);
-        Graphics.renderToDisplay();
+        this.printString(this.preRenderContext, 'Testing Vsync...', 8, 24, 4);
+        this.renderToDisplay();
 
         const now = Date.now();
         let frameCount = 0;
@@ -105,8 +105,8 @@ const Graphics = {
         this.font = await this.loadImage('gfx/font.png');
         this.preRenderContext.fillStyle = '#000';
         this.preRenderContext.fillRect(0, 0, this.display.width, this.display.height);
-        Graphics.printString(Graphics.preRenderContext, 'Loading Graphics...', 8, 8, 0);
-        Graphics.renderToDisplay();
+        this.printString(this.preRenderContext, 'Loading Graphics...', 8, 8, 0);
+        this.renderToDisplay();
         this.spritePlayer = await this.loadImage('gfx/hypergyro.png');
         this.spriteLaser = await this.loadImage('gfx/laser.png');
         this.spriteAlien = await this.loadImage('gfx/alien.png');
@@ -142,11 +142,11 @@ const Graphics = {
     drawStatsTate() {
         player.renderStatsTate();
 
-        Graphics.printString(Graphics.preRenderContext, 'HI', 184, 0, 3);
-        Graphics.printIntRight(Graphics.preRenderContext, System.hi, 216, 8, 4);
+        this.printString(this.preRenderContext, 'HI', 184, 0, 3);
+        this.printIntRight(this.preRenderContext, System.hi, 216, 8, 4);
 
-        Graphics.printString(Graphics.preRenderContext, '@2024', 44, 248, 0);
-        Graphics.printString(Graphics.preRenderContext, 'Red Balltop', 92, 248, 6);
+        this.printString(this.preRenderContext, '@2024', 44, 248, 0);
+        this.printString(this.preRenderContext, 'Red Balltop', 92, 248, 6);
     },
     drawStatsYoko() {
         this.preRenderContext.fillStyle = '#00f';
@@ -154,12 +154,12 @@ const Graphics = {
 
         player.renderStatsYoko();
 
-        Graphics.printString(Graphics.preRenderContext, 'HI', 232, 40, 3);
-        Graphics.printIntRight(Graphics.preRenderContext, System.hi, 304, 48, 4);
+        this.printString(this.preRenderContext, 'HI', 232, 40, 3);
+        this.printIntRight(this.preRenderContext, System.hi, 304, 48, 4);
 
-        Graphics.printString(Graphics.preRenderContext, '@2024', 232, 192, 0);
-        Graphics.printString(Graphics.preRenderContext, 'Red', 280, 192, 6);
-        Graphics.printString(Graphics.preRenderContext, 'Balltop', 232, 200, 6);
+        this.printString(this.preRenderContext, '@2024', 232, 192, 0);
+        this.printString(this.preRenderContext, 'Red', 280, 192, 6);
+        this.printString(this.preRenderContext, 'Balltop', 232, 200, 6);
     },
     clear() {
         // Clear Play Area
