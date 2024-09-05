@@ -155,21 +155,21 @@ class Player extends Object3D {
     }
 
     renderStatsTate() {
-        Graphics.printString(Graphics.displayContext, 'SCORE', 8, 0, 6);
-        Graphics.printIntRight(Graphics.displayContext, this.score, 56, 8, 4);
+        Graphics.printString(Graphics.preRenderContext, 'SCORE', 8, 0, 6);
+        Graphics.printIntRight(Graphics.preRenderContext, this.score, 56, 8, 4);
 
-        Graphics.printString(Graphics.displayContext, 'MULTIPLIER', 52, 240, 1);
-        Graphics.printString(Graphics.displayContext, 'X', 140, 240, 4);
-        Graphics.printIntRight(Graphics.displayContext, this.multiplier, 164, 240, 4);
+        Graphics.printString(Graphics.preRenderContext, 'MULTIPLIER', 52, 240, 1);
+        Graphics.printString(Graphics.preRenderContext, 'X', 140, 240, 4);
+        Graphics.printIntRight(Graphics.preRenderContext, this.multiplier, 164, 240, 4);
     }
 
     renderStatsYoko() {
-        Graphics.printString(Graphics.displayContext, 'SCORE', 232, 8, 6);
-        Graphics.printIntRight(Graphics.displayContext, this.score, 304, 16, 4);
+        Graphics.printString(Graphics.preRenderContext, 'SCORE', 232, 8, 6);
+        Graphics.printIntRight(Graphics.preRenderContext, this.score, 304, 16, 4);
 
-        Graphics.printString(Graphics.displayContext, 'MULTIPLIER', 232, 160, 1);
-        Graphics.printString(Graphics.displayContext, 'X', 280, 168, 4);
-        Graphics.printIntRight(Graphics.displayContext, this.multiplier, 304, 168, 4);
+        Graphics.printString(Graphics.preRenderContext, 'MULTIPLIER', 232, 160, 1);
+        Graphics.printString(Graphics.preRenderContext, 'X', 280, 168, 4);
+        Graphics.printIntRight(Graphics.preRenderContext, this.multiplier, 304, 168, 4);
     }
 }
 Player.DIR_STRAIGHT = 0;

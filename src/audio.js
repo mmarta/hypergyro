@@ -6,7 +6,8 @@ const AudioSystem = {
     context: null,
     controlContext: null,
     async init() {
-        Graphics.printString(Graphics.displayContext, 'Loading Audio...', 8, 16, 6);
+        Graphics.printString(Graphics.preRenderContext, 'Loading Audio...', 8, 16, 6);
+        Graphics.renderToDisplay();
         this.bgm = await this.loadAudioFile('audio/hypergyro-bgm.mp3', false, true);
         this.playerFire = await this.loadAudioFile('audio/player-fire.mp3', false, false);
         this.playerZap = await this.loadAudioFile('audio/player-zap.mp3', false, false);

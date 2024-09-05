@@ -51,7 +51,7 @@ const Control = {
          setTimeout(this.pollGamepads, 0);
     },
     setTouchPos(touchX, touchY) {
-        const ratio = Graphics.screenW / Graphics.display.width;
+        const ratio = Graphics.screenW / Graphics.preRender.width;
         const relTouchX = touchX / ratio;
         if(relTouchX < 92) this.touchPos = this.TOUCH_LEFT;
         else if(relTouchX >= 132 && relTouchX < 224) this.touchPos = this.TOUCH_RIGHT;

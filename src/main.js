@@ -174,16 +174,18 @@
             Graphics.nextFrame(gameLoop);
         } catch(ex) {
             console.error(ex);
-            Graphics.displayContext.fillStyle = '#000';
-            Graphics.displayContext.fillRect(0, 0, Graphics.display.width, Graphics.display.height);
+            Graphics.preRenderContext.fillStyle = '#000';
+            Graphics.preRenderContext.fillRect(0, 0, Graphics.display.width, Graphics.display.height);
             if(Graphics.font) {
-                Graphics.printString(Graphics.displayContext, ex.error, 8, 8, 6);
-                Graphics.printString(Graphics.displayContext, ex.file, 16, 16, 5);
+                Graphics.printString(Graphics.preRenderContext, ex.error, 8, 8, 6);
+                Graphics.printString(Graphics.preRenderContext, ex.file, 16, 16, 5);
             } else {
-                Graphics.displayContext.fillStyle = '#ff0000';
-                Graphics.displayContext.font = "16px Arial";
-                Graphics.displayContext.fillText('Could not load font.', 20, 20);
+                Graphics.preRenderContext.fillStyle = '#ff0000';
+                Graphics.preRenderContext.font = "16px Arial";
+                Graphics.preRenderContext.fillText('Could not load font.', 20, 20);
             }
+
+            Graphics.renderToDisplay();
         }
     }
 
